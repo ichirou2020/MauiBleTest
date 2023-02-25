@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiBleTest.MainPage">
+
+    <StackLayout>
+        <Frame BackgroundColor="LightGreen" Padding="24" CornerRadius="0">
+            <Label Text="風呂ブザー" HorizontalTextAlignment="Center" TextColor="DarkCyan" FontSize="36"/>
+        </Frame>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Text="接続状態" />
+            <Label Grid.Row="0" Grid.Column="1"  x:Name="StatConn"/>
+            <Label Grid.Row="1" Grid.Column="0" Text="風呂の状態"/>
+            <Label Grid.Row="1" Grid.Column="1" x:Name="StatBath"/>
+            <Label Grid.Row="2" Grid.Column="0" Text="最後の受信が正常か"/>
+            <Label Grid.Row="2" Grid.Column="1" x:Name="StatRcv"/>
+        </Grid>
+    </StackLayout>
+
+    <!--<ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Center">
+ 
+            --><!--<Image
+                Source="dotnet_bot.png"
+                SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                HeightRequest="200"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="Hello, World!"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="32"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="Welcome to .NET Multi-platform App UI"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="18"
+                HorizontalOptions="Center" />
+
+            <Button
+                x:Name="CounterBtn"
+                Text="Click me"
+                SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="OnCounterClicked"
+                HorizontalOptions="Center" />--><!--
+
+        </VerticalStackLayout>
+    </ScrollView>-->
+
+</ContentPage>
