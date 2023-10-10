@@ -340,10 +340,10 @@ namespace MauiBleTest.ble
 
 					//_device = device;
 
-					var services = await device.GetServicesAsync(); //発見したサービスを片っ端から捕まえる
-					Guid id1 = services[0].Id;
-					Guid id2 = services[1].Id;
-					Guid id3 = services[2].Id;
+					//var services = await device.GetServicesAsync(); //発見したサービスを片っ端から捕まえる
+					//Guid id1 = services[0].Id;
+					//Guid id2 = services[1].Id;
+					//Guid id3 = services[2].Id;
 
 					var service = await device.GetServiceAsync(Guid.Parse(_bleconInfo.UUService)); //指定したサービスを捕まえる
 					if (service != null)
@@ -466,13 +466,14 @@ namespace MauiBleTest.ble
 				var characteristic = await _service.GetCharacteristicAsync(Guid.Parse(_bleconInfo.UUCharacteristic));
 				//var characteristic = await service.GetCharacteristicAsync(Guid.Parse("d8de624e-140f-4a22-8594-e2216b84a5f2"));
 				//var characteristics = await service.GetCharacteristicsAsync();
-				var bytes = await characteristic.ReadAsync();
-				if (bytes.Length != 0)
+				var bytes = await characteristic.ReadAsync();	// ★ver 2.13から変わった	戻り値がbyte[]のデータ配列からデータ配列と結果のtoupleになった
+				var bytesdate = bytes.data;	//データの取得
+				if (bytesdate.Length != 0)
 				{
 					EventArgsRecvBLEData e = new EventArgsRecvBLEData();
-					e.bdata = bytes;
+					e.bdata = bytesdate;
 					OnRecvData(this, e);
-					Debug.WriteLine(bytes[0].ToString() + bytes[1].ToString() + bytes[5].ToString() + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"));
+					Debug.WriteLine(bytesdate[0].ToString() + bytesdate[1].ToString() + bytesdate[5].ToString() + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"));
 				}
 				//_rec = true;
 			}
@@ -508,8 +509,8 @@ namespace MauiBleTest.ble
 					//var a = characteristic.GetDescriptorAsync(Guid.Parse(_bleconInfo.UUCharacteristic));
 					if (characteristic.CanWrite == true)
 					{
-						bool bo = await characteristic.WriteAsync(bdata);
-						if (bo == false)
+						int rslt = await characteristic.WriteAsync(bdata);  // ★ver 2.13から変わった	戻り値がbool -> int(0=成功)
+                        if (rslt != 0)
 						{
 							DisConnect();//送信失敗したら切断
 						}
